@@ -37,6 +37,7 @@ module.exports = {
 		"$fetch": "readonly",
 		"defineEventHandler": "readonly",
 		"useBody": "readonly",
+		"useFetch": "readonly",
 		"useHead": "readonly"
 	}
 };
