@@ -8,6 +8,7 @@ module.exports = {
 	},
 	"extends": [
 		"eslint:recommended",
+		"plugin:nuxt/recommended",
 		"plugin:vue/vue3-strongly-recommended"
 	],
 	"parserOptions": {
