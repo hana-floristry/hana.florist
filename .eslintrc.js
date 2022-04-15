@@ -32,5 +32,11 @@ module.exports = {
 		"vue/max-attributes-per-line": ["error", { singleline: 2, multiline: 1 }],
 		"vue/multi-word-component-names": "off",
 		"vue/require-default-prop": "off"
+	},
+	"globals": {
+		"$fetch": "readonly",
+		"defineEventHandler": "readonly",
+		"useBody": "readonly",
+		"useHead": "readonly"
 	}
 };
