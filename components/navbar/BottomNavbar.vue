@@ -1,5 +1,4 @@
 <script setup>
-
 import BottomNavbarItem from "~/components/navbar/BottomNavbarItem.vue";
 </script>
 
