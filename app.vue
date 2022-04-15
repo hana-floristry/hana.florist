@@ -1,8 +1,14 @@
 <template>
-	<NuxtPage />
+	<NuxtLayout name="navbar">
+		<NuxtPage />
+	</NuxtLayout>
 </template>
 
 <style>
+html {
+	@apply bg-red-100
+}
+
 @font-face {
 	font-display: swap;
 	font-family: "Cormorant SC";
