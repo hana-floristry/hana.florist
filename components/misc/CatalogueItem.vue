@@ -5,7 +5,7 @@ const props = defineProps({
 
 function formatPrice() {
 	const price = Math.floor(props.item.price / 1000);
-	return `Rp ${price.toLocaleString().replace(/,/g, ".")}`;
+	return `Rp ${price.toLocaleString("id")}`;
 }
 </script>
 
