@@ -8,7 +8,7 @@
 
 <style>
 html {
-	@apply bg-red-100
+	background-color: #FEE2E2;
 }
 
 @font-face {
