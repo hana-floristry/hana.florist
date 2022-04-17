@@ -8,7 +8,7 @@ import BottomNavbarItem from "~/components/navbar/BottomNavbarItem.vue";
 			<NuxtLink class="basis-1/3 text-red-200" to="/">
 				<BottomNavbarItem icon="ic:round-home" text="Home" />
 			</NuxtLink>
-			<NuxtLink class="basis-1/3 text-red-200" to="/">
+			<NuxtLink class="basis-1/3 text-red-200" to="/catalogue">
 				<BottomNavbarItem icon="ic:round-menu-book" text="Catalogue" />
 			</NuxtLink>
 			<NuxtLink class="basis-1/3 text-red-200" to="https://api.whatsapp.com/send?phone=628153898399">

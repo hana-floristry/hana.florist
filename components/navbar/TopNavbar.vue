@@ -29,7 +29,7 @@ import LogoLight from "~/assets/img/logo-light.svg";
 				<NuxtLink to="/">
 					<TopNavbarItem text="Home" />
 				</NuxtLink>
-				<NuxtLink to="/">
+				<NuxtLink to="/catalogue">
 					<TopNavbarItem text="Catalogue" />
 				</NuxtLink>
 				<NuxtLink to="https://api.whatsapp.com/send?phone=628153898399">
