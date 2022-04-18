@@ -210,7 +210,7 @@ function validateItem() {
 								<span class="font-lexend text-md">
 									Rp {{ item.price.toLocaleString("id") }}
 								</span>
-								<span class="font-lexend text-md">
+								<span class="font-lexend text-md whitespace-pre-wrap">
 									{{ item.description }}
 								</span>
 							</div>
@@ -229,13 +229,14 @@ function validateItem() {
 						placeholder="Name"
 						v-model="data.item.name"
 					/>
-					<input
-						class="p-2 w-full font-cormorant text-xl rounded-md"
+					<textarea
+						class="p-2 w-full font-lexend text-xl rounded-md"
 						placeholder="Description (optional)"
+						rows="6"
 						v-model="data.item.description"
 					/>
 					<input
-						class="p-2 w-full font-cormorant text-xl rounded-md"
+						class="p-2 w-full font-lexend text-xl rounded-md"
 						placeholder="Price"
 						type="number"
 						v-model="data.item.price"
