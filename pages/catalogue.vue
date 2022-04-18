@@ -26,8 +26,11 @@ const { data } = await useFetch("/api/catalogue");
 			:key="category.id"
 			v-for="category in data"
 		>
-			<h1 class="py-12 font-cormorant text-4xl text-center text-red-800">
+			<h1 class="mt-12 font-cormorant text-4xl text-center text-red-800">
 				{{ category.name }}
+			</h1>
+			<h1 class="mb-12 font-cormorant text-2xl text-center text-red-800">
+				{{ category.description }}
 			</h1>
 			<div class="grid grid-cols-2 gap-x-6 gap-y-15 sm:grid-cols-3 md:grid-cols-4 mx-6">
 				<CatalogueItem
