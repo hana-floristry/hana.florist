@@ -1,6 +1,4 @@
 <script setup>
-import TopNavbarItem from "~/components/navbar/TopNavbarItem.vue";
-
 import LogoDark from "~/assets/img/logo-dark.svg";
 import LogoLight from "~/assets/img/logo-light.svg";
 </script>
@@ -26,15 +24,15 @@ import LogoLight from "~/assets/img/logo-light.svg";
 				/>
 			</div>
 			<div class="flex gap-24 justify-between font-cormorant">
-				<NuxtLink to="/">
-					<TopNavbarItem text="Home" />
-				</NuxtLink>
-				<NuxtLink to="/catalogue">
-					<TopNavbarItem text="Catalogue" />
-				</NuxtLink>
-				<NuxtLink to="https://api.whatsapp.com/send?phone=628153898399">
-					<TopNavbarItem text="Contact" />
-				</NuxtLink>
+				<router-link class="text-xl text-red-800" to="/">
+					Home
+				</router-link>
+				<router-link class="text-xl text-red-800" to="/catalogue">
+					Catalogue
+				</router-link>
+				<a class="text-xl text-red-800" href="https://api.whatsapp.com/send?phone=628153898399">
+					Contact
+				</a>
 			</div>
 			<div />
 		</div>

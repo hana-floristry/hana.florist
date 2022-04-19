@@ -25,22 +25,25 @@ const cropping = reactive({
 	status: false
 });
 
-function headers() {
-	return {
-		"Authorization": data.password,
-		"Content-Type": "application/json"
-	};
+async function $fetch(url, method, body) {
+	const res = await fetch(url, {
+		method,
+		headers: {
+			"Authorization": data.password,
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(body)
+	});
+
+	if (res.ok) return await res.json();
+
+	throw new Error;
 }
 
 async function addCategory() {
 	if (!validateCategory()) return;
 
-	const category = await $fetch("/api/categories", {
-		method: "POST",
-		headers: headers(),
-		body: data.category
-	});
-
+	const category = await $fetch("/api/categories", "POST", data.category);
 	data.catalogue.push(category);
 	data.category = {};
 }
@@ -48,13 +51,9 @@ async function addCategory() {
 async function addItem() {
 	if (!validateItem()) return;
 
-	const item = await $fetch("/api/items", {
-		method: "POST",
-		headers: headers(),
-		body: {
-			...data.item,
-			categoryId: active.category.id
-		}
+	const item = await $fetch("/api/items", "POST", {
+		...data.item,
+		categoryId: active.category.id
 	});
 
 	const category = data.catalogue.find(c => c.id == item.categoryId);
@@ -70,43 +69,35 @@ async function confirmCrop() {
 async function deleteCategory(category) {
 	if (!confirm(`Are you sure you want to delete ${category.name}?`)) return;
 
-	await $fetch("/api/categories", {
-		method: "DELETE",
-		headers: headers(),
-		body: { id: category.id }
-	});
-
+	await $fetch("/api/categories", "DELETE", { id: category.id });
 	data.catalogue = data.catalogue.filter(c => c != category);
 }
 
 async function deleteItem(item) {
 	if (!confirm(`Are you sure you want to delete ${item.name}?`)) return;
 
-	await $fetch("/api/items", {
-		method: "DELETE",
-		headers: headers(),
-		body: { id: item.id }
-	});
-
+	await $fetch("/api/items", "DELETE", { id: item.id });
 	const category = data.catalogue.find(c => c.id == item.categoryId);
 	category.items = category.items.filter(i => i != item);
 }
 
 async function fetchCatalogue() {
-	data.catalogue = await $fetch("/api/catalogue");
+	const res = await fetch("/api/catalogue");
+	data.catalogue = await res.json();
 	active.category = data.catalogue[0];
 }
 
 async function login() {
-	try {
-		await $fetch("/api/login", {
-			method: "POST",
-			body: { password: data.password }
-		});
+	const res = await fetch("/api/login", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ password: data.password })
+	});
 
+	if (res.ok) {
 		data.auth = true;
 		fetchCatalogue();
-	} catch (err) {
+	} else {
 		data.alert = true;
 	}
 }
@@ -162,8 +153,8 @@ function validateItem() {
 					v-for="category in data.catalogue"
 				>
 					<div
-						class="flex-1 p-4 font-cormorant text-2xl text-red-800 hover:text-red-200 hover:bg-red-900 rounded-md border-2 border-red-800 hover:border-red-900 cursor-pointer"
-						:class="{ 'bg-red-900 text-red-200': category == active.category }"
+						class="flex-1 p-4 font-cormorant text-2xl hover:text-red-200 hover:bg-red-900 rounded-md border-2 border-red-800 hover:border-red-900 cursor-pointer"
+						:class="category == active.category ? 'bg-red-900 text-red-200' : 'text-red-800'"
 						@click="active.category = category"
 					>
 						{{ category.name }}

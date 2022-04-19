@@ -1,22 +1,40 @@
 {
-	"private": true,
+	"name": "hana.florist",
+	"version": "1.0.0",
+	"main": "./src/server/index.js",
 	"scripts": {
-		"dev": "nuxi dev",
-		"build": "nuxi build",
-		"start": "node .output/server/index.mjs",
-		"lint": "eslint --ext .js,.vue ."
+		"dev": "vite",
+		"build": "vite build",
+		"serve": "vite preview",
+		"lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+		"start": "prisma migrate deploy && node ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hana-floristry/hana.florist.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/hana-floristry/hana.florist/issues"
+	},
+	"homepage": "https://github.com/hana-floristry/hana.florist",
+	"dependencies": {
+		"@prisma/client": "^3.12.0",
+		"express": "^4.17.3",
+		"vue": "^3.2.33",
+		"vue-advanced-cropper": "^2.8.1",
+		"vue-router": "^4.0.14"
 	},
 	"devDependencies": {
 		"@iconify/vue": "^3.2.1",
+		"@vitejs/plugin-vue": "^2.3.1",
 		"eslint": "^8.13.0",
-		"eslint-plugin-nuxt": "^3.2.0",
 		"eslint-plugin-vue": "^8.6.0",
-		"nuxt-windicss": "^2.2.10",
-		"nuxt3": "latest",
-		"prisma": "^3.12.0"
-	},
-	"dependencies": {
-		"@prisma/client": "^3.12.0",
-		"vue-advanced-cropper": "^2.8.1"
+		"prisma": "^3.12.0",
+		"vite": "^2.9.5",
+		"vite-plugin-pages": "^0.23.0",
+		"vite-plugin-windicss": "^1.8.4",
+		"windicss": "^3.5.1"
 	}
 }
