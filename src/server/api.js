@@ -85,7 +85,7 @@ app.post("/items", async (req, res) => {
 });
 
 app.delete("/items", async (req, res) => {
-	const item = prisma.item.delete({
+	const item = await prisma.item.delete({
 		where: req.body
 	});
 
