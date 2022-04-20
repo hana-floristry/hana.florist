@@ -9,7 +9,7 @@ COPY . .
 RUN npm ci
 RUN npm run build
 RUN mv ./dist/ ./src/server/dist/
-RUN mkdir ./src/server/dist/uploads/
+RUN mkdir -p ./src/server/dist/uploads/
 
 RUN npx prisma generate
 
