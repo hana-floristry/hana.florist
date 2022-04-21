@@ -16,6 +16,7 @@ const data = reactive({
 
 const active = reactive({
 	category: {},
+	item: {},
 	items: computed(() => data.catalogue.find(c => c.id == active.category?.id)?.items)
 });
 
@@ -23,6 +24,11 @@ const cropping = reactive({
 	canvas: null,
 	image: null,
 	status: false
+});
+
+const editing = reactive({
+	category: {},
+	item: {}
 });
 
 async function $fetch(url, method, body) {
@@ -79,6 +85,18 @@ async function deleteItem(item) {
 	await $fetch("/api/items", "DELETE", { id: item.id });
 	const category = data.catalogue.find(c => c.id == item.categoryId);
 	category.items = category.items.filter(i => i != item);
+}
+
+async function editCategory() {
+	const { id, name, description } = active.category;
+	await $fetch("/api/categories", "PATCH", { id, name, description });
+	alert("Category updated!");
+}
+
+async function editItem() {
+	const { id, name, description, price } = active.item;
+	await $fetch("/api/items", "PATCH", { id, name, description, price });
+	alert("Item updated!");
 }
 
 async function fetchCatalogue() {
@@ -181,6 +199,21 @@ function validateItem() {
 						Add Category
 					</button>
 				</form>
+				<form class="flex flex-col gap-3" @submit.prevent="editCategory">
+					<input
+						class="p-2 w-full font-cormorant text-xl rounded-md"
+						placeholder="Name"
+						v-model="active.category.name"
+					/>
+					<input
+						class="p-2 w-full font-cormorant text-xl rounded-md"
+						placeholder="Description (optional)"
+						v-model="active.category.description"
+					/>
+					<button class="flex-1 px-4 py-2 font-cormorant text-2xl text-red-800 hover:text-red-200 hover:bg-red-900 rounded-md border-2 border-red-800 hover:border-red-900 cursor-pointer">
+						Edit Category
+					</button>
+				</form>
 			</div>
 			<div class="flex flex-col gap-3 col-span-2">
 				<div
@@ -188,7 +221,11 @@ function validateItem() {
 					:key="item.id"
 					v-for="item in active.items"
 				>
-					<div class="flex-1 p-4 text-red-800 rounded-md border-2 border-red-800">
+					<div
+						class="flex-1 p-4 hover:text-red-200 hover:bg-red-900 rounded-md border-2 border-red-800 hover:border-red-900 cursor-pointer"
+						:class="item == active.item ? 'bg-red-900 text-red-200' : 'text-red-800'"
+						@click="active.item = item"
+					>
 						<div class="flex gap-3">
 							<img
 								class="w-24 h-24"
@@ -258,6 +295,28 @@ function validateItem() {
 					</div>
 					<button class="flex-1 px-4 py-2 font-cormorant text-2xl text-red-800 hover:text-red-200 hover:bg-red-900 rounded-md border-2 border-red-800 hover:border-red-900 cursor-pointer">
 						Add Item to Category
+					</button>
+				</form>
+				<form class="flex flex-col gap-3" @submit.prevent="editItem">
+					<input
+						class="p-2 w-full font-cormorant text-xl rounded-md"
+						placeholder="Name"
+						v-model="active.item.name"
+					/>
+					<textarea
+						class="p-2 w-full font-lexend text-xl rounded-md"
+						placeholder="Description (optional)"
+						rows="6"
+						v-model="active.item.description"
+					/>
+					<input
+						class="p-2 w-full font-lexend text-xl rounded-md"
+						placeholder="Price"
+						type="number"
+						v-model="active.item.price"
+					/>
+					<button class="flex-1 px-4 py-2 font-cormorant text-2xl text-red-800 hover:text-red-200 hover:bg-red-900 rounded-md border-2 border-red-800 hover:border-red-900 cursor-pointer">
+						Edit Item
 					</button>
 				</form>
 			</div>
