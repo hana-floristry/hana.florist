@@ -47,6 +47,20 @@ app.post("/categories", async (req, res) => {
 	res.json(category);
 });
 
+app.patch("/categories", async (req, res) => {
+	const { id } = req.body;
+	delete req.body.id;
+
+	const category = await prisma.category.update({
+		where: {
+			id
+		},
+		data: req.body
+	});
+
+	res.json(category);
+});
+
 app.delete("/categories", async (req, res) => {
 	const { id } = req.body;
 
@@ -79,6 +93,20 @@ app.post("/items", async (req, res) => {
 				}
 			}
 		}
+	});
+
+	res.json(item);
+});
+
+app.patch("/items", async (req, res) => {
+	const { id } = req.body;
+	delete req.body.id;
+
+	const item = await prisma.item.update({
+		where: {
+			id
+		},
+		data: req.body
 	});
 
 	res.json(item);
