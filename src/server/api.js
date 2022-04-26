@@ -82,7 +82,7 @@ app.post("/items", async (req, res) => {
 	const data = req.body;
 	const { categoryId } = data;
 	delete data.categoryId;
-	data.image = upload(data.image);
+	data.image = await upload(data.image);
 
 	const item = await prisma.item.create({
 		data: {
