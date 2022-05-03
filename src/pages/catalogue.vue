@@ -11,7 +11,6 @@ function formatPrice(price) {
 async function fetchCatalogue() {
 	const res = await fetch("/api/catalogue");
 	data.catalogue = await res.json();
-	data.activeCategory = data.catalogue[0];
 }
 
 onMounted(fetchCatalogue);
@@ -25,12 +24,12 @@ onMounted(fetchCatalogue);
 		>
 			<div
 				class="flex justify-center items-center py-3 font-cormorant text-4xl text-center hover:text-red-200 hover:bg-red-800 rounded border border-red-800 border-3 cursor-pointer"
-				:class="data.activeCategory == category ? 'text-red-200 bg-red-800' : 'text-red-800'"
-				@click="data.activeCategory = category;"
+				:class="category.active ? 'text-red-200 bg-red-800' : 'text-red-800'"
+				@click="category.active = !category.active"
 			>
 				{{ category.name }}
 			</div>
-			<div v-if="data.activeCategory == category">
+			<div v-if="category.active">
 				<h1 class="my-9 font-cormorant text-2xl text-center text-red-800">
 					{{ category.description }}
 				</h1>
