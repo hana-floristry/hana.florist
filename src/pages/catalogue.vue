@@ -33,7 +33,7 @@ onMounted(fetchCatalogue);
 				<h1 class="my-9 font-cormorant text-2xl text-center text-red-800">
 					{{ category.description }}
 				</h1>
-				<div class="grid grid-cols-2 gap-x-6 gap-y-15 sm:grid-cols-3 md:grid-cols-4 mx-6">
+				<div class="grid grid-cols-2 gap-x-6 gap-y-15 sm:grid-cols-3 md:grid-cols-4">
 					<div
 						class="flex flex-col gap-1 text-red-800"
 						:key="item.id"
